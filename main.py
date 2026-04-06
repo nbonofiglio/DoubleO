@@ -1,5 +1,6 @@
 def main():
     import os
+    import argparse
     from dotenv import load_dotenv
     from google import genai
 
@@ -10,7 +11,11 @@ def main():
     
     client = client = genai.Client(api_key=api_key)
 
-    response = client.models.generate_content(model="gemini-2.5-flash", contents="Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum.")
+    parser = argparse.ArgumentParser(description="Prompt Gemini")
+    parser.add_argument("user_prompt", type=str, help="User prompt text being sent to Gemini")
+    args = parser.parse_args()
+
+    response = client.models.generate_content(model="gemini-2.5-flash", contents=args.user_prompt)
     prompt_tokens = response.usage_metadata.prompt_token_count
     response_tokens = response.usage_metadata.candidates_token_count
     
