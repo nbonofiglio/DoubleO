@@ -5,7 +5,10 @@ build/
 dist/
 wheels/
 *.egg-info
+.main.pys.swp
 
 # Virtual environments
 .venv
 .env
+
+.DS_Store
